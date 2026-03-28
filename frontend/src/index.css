@@ -1,0 +1,554 @@
+/* Custom properties for Light/Dark themes */
+:root {
+  --bg-dark: #f0f2f8;
+  --bg-panel: rgba(255, 255, 255, 0.7);
+  --map-land: #ffffff;
+  --map-stroke: #ced3e0;
+  --text-main: #14141e;
+  --text-dim: #444855;
+  --accent: #5e17eb; /* Deep Purple */
+  --logo: #000;
+  --accent-rgb: 94, 23, 235;
+  --pulse: #ff3b30;
+  --btn-border: rgba(0, 0, 0, 0.1);
+  --glass-hover: rgba(255, 255, 255, 0.9);
+}
+
+:root.dark {
+  --bg-dark: #0a0b14;
+  --bg-panel: rgba(18, 19, 28, 0.6);
+  --map-land: #161824;
+  --logo: #fff;
+  --map-stroke: rgba(255, 255, 255, 0.08);
+  --text-main: #f0f0f5;
+  --text-dim: #8b92a5;
+  --accent: #00d4ff; /* Neon Cyan */
+  --accent-rgb: 0, 212, 255;
+  --pulse: #ff4757;
+  --btn-border: rgba(255, 255, 255, 0.15);
+  --glass-hover: rgba(40, 40, 55, 0.8);
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", system-ui, sans-serif;
+}
+html {
+  min-height: 100vh;
+}
+body {
+  color: var(--text-main);
+  transition: background-color 0.4s ease;
+  min-height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Home Grid Backgrounds */
+:root.light body {
+  background-color: var(--bg-dark);
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+:root.dark body {
+  background-color: var(--bg-dark);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* HD Textural Background for Subpages */
+.page-bg-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -5;
+  transition: opacity 0.8s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+.page-bg-wrapper.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+:root.light .page-bg-wrapper {
+  background:
+    radial-gradient(ellipse at 80% 30%, #aedafe 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 80%, #d4e8fc 0%, transparent 50%), #fbfcfd;
+}
+:root.dark .page-bg-wrapper {
+  background:
+    radial-gradient(ellipse at 85% 35%, #172c4a 0%, transparent 60%),
+    radial-gradient(ellipse at 15% 85%, #15253b 0%, transparent 60%), #04070e;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  z-index: 50;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.brand {
+  font-size: 1.8rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+}
+.brand svg {
+  color: var(--logo);
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.theme-toggle {
+  background: var(--bg-panel);
+  border: 1px solid var(--btn-border);
+  padding: 12px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--text-main);
+  transition: 0.3s;
+  backdrop-filter: blur(10px);
+}
+.theme-toggle:hover {
+  background: var(--glass-hover);
+  transform: rotate(15deg);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Home / Back icon styling in Navbar */
+.home-back-btn {
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: var(--bg-panel);
+  border: 1px solid var(--btn-border);
+  cursor: pointer;
+  color: var(--text-main);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: fadeIn 0.4s ease forwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.home-back-btn:hover {
+  background: var(--glass-hover);
+  transform: scale(1.05);
+  color: var(--accent);
+}
+
+/* The Map Container Layout */
+.map-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition:
+    transform 0.4s cubic-bezier(0.87, 0, 0.13, 1),
+    opacity 0.4s;
+  padding-bottom: 50px;
+}
+.map-wrapper.hidden {
+  transform: translateX(50vw) scale(0.6);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rsm-geographies {
+  outline: none;
+}
+.rsm-geography {
+  fill: var(--map-land) !important;
+  stroke: var(--map-stroke) !important;
+  stroke-width: 0.5px !important;
+  outline: none !important;
+  transition: all 0.2s ease;
+}
+.rsm-geography:hover {
+  fill: var(--btn-border) !important;
+  cursor: crosshair;
+}
+
+/* Tooltip for Country Hover */
+.country-tooltip {
+  position: absolute;
+  padding: 8px 14px;
+  background: var(--text-main);
+  color: var(--bg-dark);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  pointer-events: none;
+  z-index: 200;
+  transform: translate(-50%, -150%);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  transition: 0.1s ease-out;
+}
+
+/* Glowing Map Markers */
+.marker-pulse {
+  animation: p 2.5s infinite ease-out;
+  transform-origin: center;
+  pointer-events: none;
+  fill: transparent;
+}
+@keyframes p {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(8);
+    opacity: 0;
+    stroke-width: 1px;
+  }
+}
+.marker-dot {
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+.marker:hover .marker-dot {
+  transform: scale(1.5);
+}
+
+/* Circular History Dial */
+.circular-dial-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 30;
+  transition: opacity 0.4s ease;
+}
+.circular-dial-container.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dial-label {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  font-size: 3rem;
+  font-weight: 800;
+  opacity: 0.05;
+  letter-spacing: 12px;
+  transform-origin: right center;
+  color: var(--text-main);
+}
+.dial-btn {
+  position: absolute;
+  background: var(--bg-panel);
+  border: 1px solid var(--btn-border);
+  color: var(--text-dim);
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(50%, -50%);
+  backdrop-filter: blur(10px);
+  pointer-events: auto;
+  cursor: pointer;
+}
+.dial-btn:hover {
+  background: var(--glass-hover);
+  color: var(--text-main);
+  transform: translate(50%, -50%) scale(1.15);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.dial-btn.active {
+  background: var(--accent);
+  color: #fff;
+  transform: translate(50%, -50%) scale(1.3);
+  box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.5);
+  border-color: var(--accent);
+  z-index: 2;
+}
+
+/* Event Details Box */
+.event-details-box {
+  position: absolute;
+  top: 120px;
+  left: 3rem;
+  width: 380px;
+  background: var(--bg-panel);
+  backdrop-filter: blur(30px);
+  border: 1px solid var(--btn-border);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  z-index: 40;
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: slideInX 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+@keyframes slideInX {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.event-details-box h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid var(--btn-border);
+  padding-bottom: 0.5rem;
+  color: var(--text-main);
+}
+.event-item {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.event-item h3 {
+  font-size: 1.2rem;
+  color: var(--text-main);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Sidebar Layout container */
+.modules-container {
+  display: flex;
+  position: absolute;
+  transition: all 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  z-index: 50;
+  pointer-events: none;
+}
+.modules-container button {
+  pointer-events: auto;
+}
+
+/* Home Mode Button Styling */
+.modules-container.home-layout {
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: row;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.modules-container.home-layout .module-btn {
+  background: var(--bg-panel);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--btn-border);
+  padding: 1.2rem 2rem;
+  border-radius: 16px;
+  color: var(--text-main);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 1.05rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  position: relative;
+}
+/* No border hover effect, just color & scale shift */
+.modules-container.home-layout .module-btn:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(var(--accent-rgb), 0.15);
+  background: var(--glass-hover);
+  color: var(--accent);
+}
+
+/* Page View Block */
+.page-view {
+  position: absolute;
+  top: 130px;
+  left: calc(3rem + 300px);
+  right: 3rem;
+  bottom: 3rem;
+  background: var(--bg-panel);
+  backdrop-filter: blur(30px);
+  border-radius: 20px;
+  border: 1px solid var(--btn-border);
+  padding: 3rem;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUpView 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  overflow-y: auto;
+  z-index: 40;
+}
+
+/* Floating Sidebar Navigation (Redesigned) */
+.modules-container.sidebar-layout {
+  top: 130px;
+  left: 3rem;
+  transform: translateX(0);
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.5rem;
+  width: 260px;
+}
+.modules-container.sidebar-layout .module-btn {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--btn-border);
+  padding: 1.2rem 1.5rem;
+  border-radius: 16px;
+  color: var(--text-main);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  width: 100%;
+}
+:root.dark .modules-container.sidebar-layout .module-btn {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Remove annoying hover border, add soft text/icon color */
+.modules-container.sidebar-layout .module-btn:hover {
+  background: var(--glass-hover);
+  color: var(--accent);
+  border-color: var(--btn-border); /* keeps border neutral */
+  transform: translateX(10px);
+}
+
+/* Redesigned Floating Active State (NO connection bug, just a sleek glowing pill indicator) */
+.modules-container.sidebar-layout .module-btn.active {
+  background: linear-gradient(
+    90deg,
+    rgba(var(--accent-rgb), 0.1) 0%,
+    transparent 100%
+  );
+  border: 1px solid var(--btn-border);
+  border-left: 4px solid var(--accent);
+  border-radius: 16px;
+  color: var(--accent);
+  z-index: 60;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transform: translateX(10px);
+  font-weight: 800;
+}
+.module-btn svg {
+  color: var(--text-dim);
+  transition: 0.3s ease;
+}
+.module-btn.active svg,
+.module-btn:hover svg {
+  color: var(--accent);
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 10px 0;
+}
+.info-cell {
+  background: rgba(0, 0, 0, 0.03);
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  border: 1px solid var(--btn-border);
+  font-weight: 600;
+}
+:root.dark .info-cell {
+  background: rgba(255, 255, 255, 0.03);
+}
+.info-cell strong {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  font-weight: 800;
+}
+.pie-chart-container {
+  height: 180px;
+  width: 100%;
+  position: relative;
+  margin-top: 10px;
+}
+.pie-center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--text-main);
+  text-align: center;
+}
+.pie-center-text small {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+/* System Time Display at Bottom Left */
+.system-time {
+  position: absolute;
+  bottom: 2rem;
+  left: 3rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-main);
+  z-index: 50;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.8;
+  pointer-events: none;
+}
