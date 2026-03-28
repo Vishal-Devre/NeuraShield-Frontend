@@ -5,7 +5,7 @@ import joblib
 import os
 
 def train_flood_model():
-    csv_path = "rainfall-dataset-india.csv"
+    csv_path = "rainfall-dataset.csv"
     if not os.path.exists(csv_path):
         print(f"Dataset {csv_path} not found.")
         return
