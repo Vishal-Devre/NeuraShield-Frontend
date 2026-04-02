@@ -1,0 +1,151 @@
+.volcano-panel {
+  width: clamp(340px, 28vw, 420px);
+  max-height: calc(100vh - 180px);
+  padding: 1.35rem;
+  border-color: rgba(255, 123, 47, 0.18);
+  background:
+    radial-gradient(circle at top right, rgba(255, 123, 47, 0.16), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 246, 238, 0.8));
+  box-shadow: 0 24px 70px rgba(54, 28, 8, 0.16);
+}
+
+:root.dark .volcano-panel {
+  background:
+    radial-gradient(circle at top right, rgba(255, 123, 47, 0.18), transparent 34%),
+    linear-gradient(180deg, rgba(19, 11, 7, 0.94), rgba(24, 14, 10, 0.86));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
+}
+
+.volcano-hero {
+  margin-bottom: 1.4rem;
+  padding: 1rem 1rem 1.1rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 123, 47, 0.16);
+  background: linear-gradient(135deg, rgba(255, 123, 47, 0.12), rgba(255, 255, 255, 0.08));
+}
+
+:root.dark .volcano-hero {
+  background: linear-gradient(135deg, rgba(255, 123, 47, 0.14), rgba(255, 255, 255, 0.02));
+}
+
+.volcano-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.5rem;
+  font-size: 1.22rem;
+  color: var(--text-main);
+}
+
+.volcano-subtitle {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+.volcano-card {
+  margin-bottom: 0;
+  border-radius: 18px;
+  border-color: rgba(255, 123, 47, 0.12);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.12)),
+    rgba(255, 255, 255, 0.08);
+}
+
+:root.dark .volcano-card {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 123, 47, 0.05)),
+    rgba(255, 255, 255, 0.02);
+}
+
+.volcano-spacer {
+  margin-top: 1rem;
+}
+
+.volcano-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.volcano-card .info-cell,
+.volcano-metric {
+  border-radius: 14px;
+  border-color: rgba(255, 123, 47, 0.12);
+  background: rgba(255, 255, 255, 0.48);
+}
+
+:root.dark .volcano-card .info-cell,
+:root.dark .volcano-metric {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.volcano-card .info-cell {
+  min-height: 82px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.volcano-metric {
+  min-height: 98px;
+}
+
+.volcano-risk-panel {
+  margin-top: 12px;
+  border: 1px solid rgba(255, 123, 47, 0.18);
+  border-left: 4px solid #ff7b2f;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255, 123, 47, 0.12), rgba(255, 255, 255, 0.08));
+}
+
+:root.dark .volcano-risk-panel {
+  background: linear-gradient(135deg, rgba(255, 123, 47, 0.12), rgba(255, 255, 255, 0.02));
+}
+
+.volcano-risk-panel .risk-footer strong {
+  color: var(--text-main);
+}
+
+.volcano-badge {
+  background: rgba(255, 123, 47, 0.16);
+  border: 1px solid rgba(255, 123, 47, 0.24);
+  color: #ff7b2f;
+}
+
+.volcano-badge--amber {
+  background: rgba(255, 165, 2, 0.14);
+  border-color: rgba(255, 165, 2, 0.2);
+  color: #ffa502;
+}
+
+.volcano-chart-wrap {
+  height: 160px;
+  margin-top: 12px;
+}
+
+.volcano-alert-card {
+  background: linear-gradient(145deg, rgba(255, 123, 47, 0.14), rgba(255, 255, 255, 0.1));
+}
+
+:root.dark .volcano-alert-card {
+  background: linear-gradient(145deg, rgba(255, 123, 47, 0.14), rgba(255, 255, 255, 0.03));
+}
+
+.volcano-alert-text {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-main);
+}
+
+.volcano-feed .feed-item {
+  border-radius: 14px;
+  border: 1px solid rgba(255, 123, 47, 0.1);
+}
+
+@media (max-width: 1100px) {
+  .volcano-info-grid {
+    grid-template-columns: 1fr;
+  }
+}

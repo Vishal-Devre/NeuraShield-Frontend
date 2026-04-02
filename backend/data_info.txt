@@ -1,0 +1,30 @@
+Storms 2013 Columns:
+['episode_id', 'event_id', 'state', 'state_fips_code', 'event_type', 'cz_type', 'cz_fips_code', 'cz_name', 'wfo', 'event_begin_time', 'event_timezone', 'event_end_time', 'injuries_direct', 'injuries_indirect', 'deaths_direct', 'deaths_indirect', 'damage_property', 'damage_crops', 'source', 'magnitude', 'magnitude_type', 'flood_cause', 'tor_f_scale', 'tor_length', 'tor_width', 'tor_other_wfo', 'location_index', 'event_range', 'event_azimuth', 'reference_location', 'event_latitude', 'event_longitude', 'event_point']
+
+Storms 2013 Head:
+   episode_id  ...          event_point
+0       69932  ...   POINT(-94.8 32.16)
+1       69932  ...  POINT(-94.93 32.27)
+
+[2 rows x 33 columns]
+
+Volcano Columns:
+['volcano_number', 'volcano_name', 'primary_volcano_type', 'last_eruption_year', 'country', 'region', 'subregion', 'latitude', 'longitude', 'elevation', 'tectonic_settings', 'evidence_category', 'major_rock_1', 'major_rock_2', 'major_rock_3', 'major_rock_4', 'major_rock_5', 'minor_rock_1', 'minor_rock_2', 'minor_rock_3', 'minor_rock_4', 'minor_rock_5', 'population_within_5_km', 'population_within_10_km', 'population_within_30_km', 'population_within_100_km']
+
+Volcano Head:
+   volcano_number  ... population_within_100_km
+0          283001  ...                  4071152
+1          355096  ...                     9092
+
+[2 rows x 26 columns]
+
+The Volcanoes Of Earth Columns:
+['Volcano_Name', 'Volcano_Image', 'Volcano_Type', 'Country', 'Region', 'Subregion', 'epoch_period', 'Last_Eruption', 'Summit_and_Elevatiuon', 'Latitude', 'Longitude', 'population_within_5km', 'population_within_10km', 'population_within_30km', 'population_within_100km']
+
+The Volcanoes Of Earth Head:
+  Volcano_Name  ... population_within_100km
+0          Abu  ...               4071152.0
+1   Acamarachi  ...                  9092.0
+
+[2 rows x 15 columns]
+
